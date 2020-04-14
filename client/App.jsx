@@ -1,28 +1,20 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import LoginScreen from './screens/LoginScreen.jsx';
+import HomeScreen from './screens/HomeScreen.jsx';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <View style={styles.signInContainer}>
-        <LoginScreen />
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fae5af',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  signInContainer: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    width: '80%',
-    alignItems: 'center',
-  },
-});

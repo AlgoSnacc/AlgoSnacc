@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.signUpTitle}>Create an account</Text>
@@ -23,7 +23,7 @@ const SignUp = () => {
           type: 'font-awesome',
           name: 'envelope',
           color: '#4a4a4a',
-          size: '20x',
+          size: 20,
           marginRight: 10,
         }}
       />
@@ -43,6 +43,7 @@ const SignUp = () => {
         buttonStyle={{ paddingLeft: 20, paddingRight: 20 }}
         title="Sign Up"
         type="solid"
+        onPress={() => navigation.navigate('Home')}
       />
     </View>
   );
