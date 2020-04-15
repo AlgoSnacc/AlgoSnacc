@@ -2,18 +2,16 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-elements';
 import Login from '../components/Login.jsx';
-import SignUp from '../components/SignUp.jsx';
 
 const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.signInContainer}>
+      <View style={styles.loginContainer}>
         {/* input Logo here */}
-        <SignUp navigation={navigation} />
         <View>
           <Divider style={styles.divider} />
         </View>
-        <Login />
+        <Login navigation={navigation} />
       </View>
     </View>
   );
@@ -28,11 +26,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  signInContainer: {
+  loginContainer: {
     backgroundColor: 'white',
     borderRadius: 10,
     width: '80%',
     alignItems: 'center',
+    shadowOffset: { width: 0, height: 2 },
+    shadowColor: '#000',
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   divider: {
     height: 1,

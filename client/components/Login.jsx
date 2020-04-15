@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
+import { NavigationContainer } from '@react-navigation/native';
 
-const Login = () => {
+const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.loginTitle}>Have an account?</Text>
+      {/* <Text style={styles.loginTitle}>Have an account?</Text> */}
       <Input
         containerStyle={{ paddingBottom: 20 }}
         placeholder="username"
@@ -28,10 +29,22 @@ const Login = () => {
       />
       <Button
         style={styles.loginButton}
-        buttonStyle={{ paddingLeft: 20, paddingRight: 20 }}
+        buttonStyle={{
+          paddingLeft: 20,
+          paddingRight: 20,
+          backgroundColor: '#2b97fc',
+        }}
         title="Login"
-        type="outline"
+        type="solid"
+        onPress={() => navigation.navigate('Home')}
       />
+      <Text style={styles.accountText}>Don't have and account?</Text>
+      <Text
+        style={styles.signUpText}
+        onPress={() => navigation.navigate('Sign Up')}
+      >
+        Sign Up
+      </Text>
     </View>
   );
 };
@@ -47,14 +60,20 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     margin: 50,
   },
-  loginTitle: {
-    marginBottom: 20,
-  },
+
   loginButton: {
     marginTop: 20,
   },
   inputField: {
     paddingBottom: 50,
     color: 'blue',
+  },
+  accountText: {
+    marginTop: 20,
+  },
+  signUpText: {
+    marginTop: 10,
+    color: '#2b97fc',
+    fontWeight: 'bold',
   },
 });
