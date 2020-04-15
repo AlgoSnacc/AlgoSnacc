@@ -40,7 +40,11 @@ const SignUp = ({ navigation }) => {
       />
       <Button
         style={styles.signUpButton}
-        buttonStyle={{ paddingLeft: 20, paddingRight: 20 }}
+        buttonStyle={{
+          paddingLeft: 20,
+          paddingRight: 20,
+          backgroundColor: '#2b97fc',
+        }}
         title="Sign Up"
         type="solid"
         onPress={() => navigation.navigate('Home')}
@@ -54,6 +58,7 @@ export default SignUp;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    alignSelf: 'center',
     width: 300,
     borderRadius: 10,
     paddingBottom: 20,
