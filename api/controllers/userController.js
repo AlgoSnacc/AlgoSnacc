@@ -4,6 +4,7 @@ const jwtController = require("./jwtsController");
 
 const userController = {};
 
+//add new user to db
 userController.createUser = async (req, res, next) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {

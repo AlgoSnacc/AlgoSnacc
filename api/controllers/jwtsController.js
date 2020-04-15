@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const jwtSecret = require("../_secret/jwtSecret");
+
+require("dotenv").config();
 
 const jwtController = {};
 
@@ -21,7 +22,8 @@ jwtController.generateToken = (id) => {
     {
       userId: id,
     },
-    jwtSecret.secret,
+    // jwtSecret.secret,
+    process.env.JWTSECRET,
     { expiresIn: "7d" }
   );
   return token;

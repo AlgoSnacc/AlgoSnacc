@@ -1,12 +1,9 @@
 // establish sql connection
 const { Pool } = require("pg");
-const dotenv = require("dotenv");
-
-dotenv.config();
-const elephantSecret = require("../_secret/elephantSecret");
+require("dotenv").config();
 
 const pool = new Pool({
-  connectionString: elephantSecret.url,
+  connectionString: process.env.ELEPHANTSECRET,
 });
 
 pool.on("connect", () => {
