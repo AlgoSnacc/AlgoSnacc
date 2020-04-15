@@ -1,70 +1,82 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
+const db = require("../db/model");
+const jwtController = require("./jwtsController");
 
-// how we could setup a middleware for signup and login if using mongodb
-/*
-module.exports = {
-  signup: (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)
-      .then((hash) => {
-        const user = new User({
-          email: req.body.email,
-          password: hash
-        });
-        user.save()
-        .then(() => {
-            res.status(201).json({
-              message: 'User added successfully!'
-            });
-          }
-        )
-        .catch((error) => {
-            res.status(500).json({
-              error: error
-            });
-          }
-        );
-      }
-    );
-  },
+const userController = {};
 
-  login: (req, res, next) => {
-    exports.login = (req, res, next) => {
-      User.findOne({ email: req.body.email }).then(
-        (user) => {
-          if (!user) {
-            return res.status(401).json({
-              error: new Error('User not found!')
-            });
-          }
-          bcrypt.compare(req.body.password, user.password).then(
-            (valid) => {
-              if (!valid) {
-                return res.status(401).json({
-                  error: new Error('Incorrect password!')
-                });
-              }
-              res.status(200).json({
-                userId: user._id,
-                token: 'token'
-              });
-            }
-          ).catch(
-            (error) => {
-              res.status(500).json({
-                error: error
-              });
-            }
-          );
-        }
-      ).catch(
-        (error) => {
-          res.status(500).json({
-            error: error
-          });
-        }
-      );
-    }
+userController.createUser = async (req, res, next) => {
+  const { username, email, password } = req.body;
+  if (!username || !email || !password) {
+    return res.status(400).send({ message: "Some values are missing" });
   }
-}
+  if (!jwtController.isValidEmail(email)) {
+    return res
+      .status(400)
+      .send({ message: "Please enter a valid email address" });
+  }
+  const hashPassword = jwtController.hashPassword(password);
 
-*/
+  const createUser = {
+    text: `
+        INSERT INTO users
+        (username, email, password)
+        VALUES
+        ($1, $2, $3)
+        RETURNING _id;
+      `,
+    values: [username, email, hashPassword],
+  };
+
+  try {
+    const { rows } = await db.query(createUser);
+    // db.query(createUser);
+    const token = jwtController.generateToken(rows[0].id);
+    return res.status(201).send({ token });
+    next();
+  } catch (error) {
+    if (error.routine === "_bt_check_unique") {
+      return res
+        .status(400)
+        .send({ message: "User with that EMAIL already exist" });
+    }
+    return res.status(400).send(error);
+  }
+};
+
+userController.login = async (req, res, next) => {
+  const { username, email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).send({ message: "Some values are missing" });
+  }
+  if (!jwtController.isValidEmail(email)) {
+    return res
+      .status(400)
+      .send({ message: "Please enter a valid email address" });
+  }
+  const user = {
+    text: `
+        SELECT * FROM users WHERE email = $1
+      `,
+    values: [email],
+  };
+
+  try {
+    const { rows } = await db.query(user);
+    if (!rows[0]) {
+      return res
+        .status(400)
+        .send({ message: "The credentials you provided is incorrect" });
+    }
+    if (!jwtController.comparePassword(rows[0].password, password)) {
+      return res
+        .status(400)
+        .send({ message: "The credentials you provided is incorrect" });
+    }
+    const token = jwtController.generateToken(rows[0]._id);
+    return res.status(200).send({ token });
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+};
+
+module.exports = userController;
