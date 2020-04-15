@@ -38,7 +38,7 @@ const Login = ({ navigation }) => {
         type="solid"
         onPress={() => navigation.navigate('Home')}
       />
-      <Text style={styles.accountText}>Don't have and account?</Text>
+      <Text style={styles.accountText}>Don't have an account?</Text>
       <Text
         style={styles.signUpText}
         onPress={() => navigation.navigate('Sign Up')}

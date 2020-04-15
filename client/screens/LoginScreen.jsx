@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Divider } from 'react-native-elements';
+import { View, StyleSheet, Text } from 'react-native';
 import Login from '../components/Login.jsx';
 
 const LoginScreen = ({ navigation }) => {
@@ -8,9 +7,7 @@ const LoginScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.loginContainer}>
         {/* input Logo here */}
-        <View>
-          <Divider style={styles.divider} />
-        </View>
+        <Text style={styles.appName}>AlgoSnacc</Text>
         <Login navigation={navigation} />
       </View>
     </View>
@@ -25,6 +22,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fae5af',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 100,
   },
   loginContainer: {
     backgroundColor: 'white',
@@ -37,9 +35,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  divider: {
-    height: 1,
-    width: 300,
-    alignSelf: 'center',
+  appName: {
+    paddingTop: 50,
+    fontSize: 30,
+    fontWeight: 'bold',
   },
 });
