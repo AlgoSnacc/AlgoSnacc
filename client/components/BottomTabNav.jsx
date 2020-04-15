@@ -30,7 +30,7 @@ const BottomTabNav = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'blue',
+        activeTintColor: '#002e59',
         inactiveTintColor: 'gray',
         tabStyle: { paddingTop: 10 },
       }}
