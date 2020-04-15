@@ -8,16 +8,20 @@ const Login = ({ navigation }) => {
     username: '',
     password: '',
   });
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
   // verify user info
-  const handleLogin = () => {
+  const handleLogin = async () => {
     console.log('login', login);
-    // const signupSuccess = await axios.post(`https://localhost:3000/`);
-    // console.log('success', signupSuccess);
-    setSuccess(true);
-    if (success) {
-      console.log('in success');
-      navigation.navigate('Home');
+    try {
+      const loginSuccess = await axios.post(`https://localhost:3000/login`);
+      console.log('success', loginSuccess.data);
+      if (loginSuccess.data) {
+        // setSuccess(true);
+        console.log('in success');
+        navigation.navigate('Home');
+      }
+    } catch (error) {
+      console.log('error login');
     }
   };
   const { username, password } = login;

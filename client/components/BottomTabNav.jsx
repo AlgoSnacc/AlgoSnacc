@@ -5,7 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen.jsx';
 import AlgoScreen from '../screens/AlgoScreen.jsx';
 import AboutScreen from '../screens/AboutScreen.jsx';
-import SignOut from './SignOut.jsx';
+// import SignOut from './SignOut.jsx';
+import LoginScreen from '../screens/LoginScreen.jsx';
 
 const Tab = createBottomTabNavigator();
 
@@ -40,7 +41,8 @@ const BottomTabNav = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Algorithms" component={AlgoScreen} />
       <Tab.Screen name="About" component={AboutScreen} />
-      <Tab.Screen name="Sign Out" component={SignOut} />
+      {/* signout functionality needs to be worked on */}
+      <Tab.Screen name="Sign Out" component={LoginScreen} />
     </Tab.Navigator>
   );
 };
