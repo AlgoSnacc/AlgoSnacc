@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
 const SignUp = ({ navigation }) => {
+  const [signup, setSignup] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [success, setSuccess] = useState(false);
+  // function to signup users and store in db
+  const handleSignup = () => {
+    console.log('in handleSignup', signup);
+    // const signupSuccess = await axios.post(`https://localhost:3000/`);
+    // console.log('success', signupSuccess);
+    setSuccess(true);
+    if (success) {
+      console.log('in success');
+      navigation.navigate('Home');
+    }
+  };
+
+  const { username, email, password } = signup;
+
   return (
     <View style={styles.container}>
       <Text style={styles.signUpTitle}>Create an account</Text>
@@ -15,6 +35,13 @@ const SignUp = ({ navigation }) => {
           color: '#4a4a4a',
           marginRight: 10,
         }}
+        value={username}
+        onChangeText={(input) =>
+          setSignup({
+            ...signup,
+            username: input,
+          })
+        }
       />
       <Input
         containerStyle={{ paddingBottom: 20 }}
@@ -26,6 +53,13 @@ const SignUp = ({ navigation }) => {
           size: 20,
           marginRight: 10,
         }}
+        value={email}
+        onChangeText={(input) =>
+          setSignup({
+            ...signup,
+            email: input,
+          })
+        }
       />
       <Input
         style={styles.inputField}
@@ -37,6 +71,13 @@ const SignUp = ({ navigation }) => {
           color: '#4a4a4a',
           marginRight: 10,
         }}
+        value={password}
+        onChangeText={(input) =>
+          setSignup({
+            ...signup,
+            password: input,
+          })
+        }
       />
       <Button
         style={styles.signUpButton}
@@ -47,7 +88,7 @@ const SignUp = ({ navigation }) => {
         }}
         title="Sign Up"
         type="solid"
-        onPress={() => navigation.navigate('Home')}
+        onPress={handleSignup}
       />
     </View>
   );

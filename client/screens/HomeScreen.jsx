@@ -1,32 +1,46 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
     <View>
-      <Card
-        title="Today's Challenge"
-        containerStyle={{
-          backgroundColor: '#24a0ff',
-          height: 200,
-          borderRadius: 10,
+      <TouchableOpacity
+        onPress={() => {
+          console.log('clicked challenge card');
+          navigation.navigate('Snacks');
         }}
-        titleStyle={{ color: 'white', alignSelf: 'flex-start' }}
       >
-        <Text style={styles.challenge}>Two Sum</Text>
-      </Card>
-      <Card
-        title="My Snacks"
-        containerStyle={{
-          backgroundColor: '#ffc561',
-          height: 200,
-          borderRadius: 10,
+        <Card
+          title="Today's Challenge"
+          containerStyle={{
+            backgroundColor: '#24a0ff',
+            height: 200,
+            borderRadius: 10,
+          }}
+          titleStyle={{ color: 'white', alignSelf: 'flex-start' }}
+        >
+          <Text style={styles.challenge}>Two Sum</Text>
+        </Card>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          console.log('clicked snacks card');
+          navigation.navigate('Snacks');
         }}
-        titleStyle={{ color: 'white', alignSelf: 'flex-start' }}
       >
-        <Text style={styles.snacks}>5 Snacks</Text>
-      </Card>
+        <Card
+          title="My Snacks"
+          containerStyle={{
+            backgroundColor: '#ffc561',
+            height: 200,
+            borderRadius: 10,
+          }}
+          titleStyle={{ color: 'white', alignSelf: 'flex-start' }}
+        >
+          <Text style={styles.snacks}>5 Snacks</Text>
+        </Card>
+      </TouchableOpacity>
     </View>
   );
 };
