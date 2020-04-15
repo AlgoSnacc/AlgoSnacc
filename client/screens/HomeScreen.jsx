@@ -14,7 +14,7 @@ const Home = ({ navigation }) => {
         <Card
           title="Today's Challenge"
           containerStyle={{
-            backgroundColor: '#24a0ff',
+            backgroundColor: '#17b9eb',
             height: 200,
             borderRadius: 10,
           }}
@@ -32,7 +32,7 @@ const Home = ({ navigation }) => {
         <Card
           title="My Snacks"
           containerStyle={{
-            backgroundColor: '#ffc561',
+            backgroundColor: '#ff7878',
             height: 200,
             borderRadius: 10,
           }}

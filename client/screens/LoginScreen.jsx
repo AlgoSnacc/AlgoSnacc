@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   logo: {
-    width: 180,
-    height: 180,
+    width: 200,
+    height: 200,
     // alignSelf: 'center',
     marginTop: 20,
   },
