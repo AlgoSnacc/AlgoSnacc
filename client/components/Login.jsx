@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingBottom: 20,
     paddingTop: 10,
-    margin: 50,
+    margin: 20,
   },
 
   loginButton: {

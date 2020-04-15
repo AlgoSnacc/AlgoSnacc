@@ -26,13 +26,15 @@ const BottomTabNav = () => {
           } else if (route.name === 'Sign Out') {
             iconName = focused ? 'ios-exit' : 'md-exit';
           }
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Ionicons name={iconName} size={35} color={color} />;
         },
       })}
       tabBarOptions={{
         activeTintColor: '#002e59',
         inactiveTintColor: 'gray',
-        tabStyle: { paddingTop: 10 },
+        showLabel: false,
+        style: { height: 80 },
+        // tabStyle: { paddingTop: 10 },
       }}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
