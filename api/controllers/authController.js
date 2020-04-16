@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 const db = require("../db/model");
-const jwtSecret = require("../_secret/jwtSecret");
+// const jwtSecret = require("../_secret/jwtSecret");
 
+require("dotenv").config();
 const authController = {};
 /**
  * Verify Token
@@ -14,7 +15,7 @@ authController.verifyToken = async (req, res, next) => {
     return res.status(400).send({ message: "Token is not provided" });
   }
   try {
-    const decoded = await jwt.verify(token, jwtSecret.secret);
+    const decoded = await jwt.verify(token, process.env.JWTSECRET);
     console.log("verified");
     const text = {
       text: `SELECT * FROM users WHERE _id = $1`,

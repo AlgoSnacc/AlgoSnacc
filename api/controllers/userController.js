@@ -4,6 +4,7 @@ const jwtController = require("./jwtsController");
 
 const userController = {};
 
+//add new user to db
 userController.createUser = async (req, res, next) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
@@ -45,19 +46,19 @@ userController.createUser = async (req, res, next) => {
 
 userController.login = async (req, res, next) => {
   const { username, email, password } = req.body;
-  if (!email || !password) {
+  if (!username || !password) {
     return res.status(400).send({ message: "Some values are missing" });
   }
-  if (!jwtController.isValidEmail(email)) {
-    return res
-      .status(400)
-      .send({ message: "Please enter a valid email address" });
-  }
+  // if (!jwtController.isValidEmail(email)) {
+  //   return res
+  //     .status(400)
+  //     .send({ message: "Please enter a valid email address" });
+  // }
   const user = {
     text: `
-        SELECT * FROM users WHERE email = $1
+        SELECT * FROM users WHERE username = $1 
       `,
-    values: [email],
+    values: [username],
   };
 
   try {
