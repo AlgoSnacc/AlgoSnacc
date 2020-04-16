@@ -24,6 +24,8 @@ authController.verifyToken = async (req, res, next) => {
     // const text = "SELECT * FROM users WHERE _id = $1";
     const { rows } = await db.query(text);
     if (!rows[0]) {
+      // res.locals.message = "The token you provided is invalid";
+      // next();
       return res
         .status(400)
         .send({ message: "The token you provided is invalid" });
