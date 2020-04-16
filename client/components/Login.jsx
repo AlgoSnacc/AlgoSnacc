@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
-import { NavigationContainer } from '@react-navigation/native';
+import axios from 'axios';
 
 const Login = ({ navigation }) => {
   const [login, setLogin] = useState({
@@ -13,7 +13,10 @@ const Login = ({ navigation }) => {
   const handleLogin = async () => {
     console.log('login', login);
     try {
-      const loginSuccess = await axios.post(`https://localhost:3000/login`);
+      const loginSuccess = await axios.post(`http://localhost:3000/login`, {
+        username: login.username,
+        password: login.password,
+      });
       console.log('success', loginSuccess.data);
       if (loginSuccess.data) {
         // setSuccess(true);
