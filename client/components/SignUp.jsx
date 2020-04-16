@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import axios from 'axios';
+import { IP } from 'react-native-dotenv';
 
 const SignUp = ({ navigation }) => {
   const [signup, setSignup] = useState({
@@ -13,8 +14,9 @@ const SignUp = ({ navigation }) => {
   // function to signup users and store in db
   const handleSignup = async () => {
     console.log('in handleSignup', signup);
+    console.log(IP);
     try {
-      const signupSuccess = await axios.post(`http://localhost:3000/signup`, {
+      const signupSuccess = await axios.post(IP + `:3000/signup`, {
         username: signup.username,
         email: signup.email,
         password: signup.password,
@@ -28,7 +30,7 @@ const SignUp = ({ navigation }) => {
         console.log('error');
       }
     } catch (error) {
-      console.log('error data');
+      console.log('error data: ', error);
     }
   };
 

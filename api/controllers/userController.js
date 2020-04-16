@@ -1,19 +1,20 @@
-const bcrypt = require("bcrypt");
-const db = require("../db/model");
-const jwtController = require("./jwtsController");
+const bcrypt = require('bcrypt');
+const db = require('../db/model');
+const jwtController = require('./jwtsController');
 
 const userController = {};
 
 //add new user to db
 userController.createUser = async (req, res, next) => {
+  console.log('createUser');
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
-    return res.status(400).send({ message: "Some values are missing" });
+    return res.status(400).send({ message: 'Some values are missing' });
   }
   if (!jwtController.isValidEmail(email)) {
     return res
       .status(400)
-      .send({ message: "Please enter a valid email address" });
+      .send({ message: 'Please enter a valid email address' });
   }
   const hashPassword = jwtController.hashPassword(password);
 
@@ -35,10 +36,10 @@ userController.createUser = async (req, res, next) => {
     return res.status(201).send({ token });
     next();
   } catch (error) {
-    if (error.routine === "_bt_check_unique") {
+    if (error.routine === '_bt_check_unique') {
       return res
         .status(400)
-        .send({ message: "User with that EMAIL already exist" });
+        .send({ message: 'User with that EMAIL already exist' });
     }
     return res.status(400).send(error);
   }
@@ -47,7 +48,7 @@ userController.createUser = async (req, res, next) => {
 userController.login = async (req, res, next) => {
   const { username, email, password } = req.body;
   if (!username || !password) {
-    return res.status(400).send({ message: "Some values are missing" });
+    return res.status(400).send({ message: 'Some values are missing' });
   }
   // if (!jwtController.isValidEmail(email)) {
   //   return res
@@ -66,12 +67,12 @@ userController.login = async (req, res, next) => {
     if (!rows[0]) {
       return res
         .status(400)
-        .send({ message: "The credentials you provided is incorrect" });
+        .send({ message: 'The credentials you provided is incorrect' });
     }
     if (!jwtController.comparePassword(rows[0].password, password)) {
       return res
         .status(400)
-        .send({ message: "The credentials you provided is incorrect" });
+        .send({ message: 'The credentials you provided is incorrect' });
     }
     const token = jwtController.generateToken(rows[0]._id);
     return res.status(200).send({ token });
