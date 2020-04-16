@@ -19,6 +19,7 @@ const Home = ({ navigation }) => {
             borderRadius: 10,
           }}
           titleStyle={{ color: 'white', alignSelf: 'flex-start' }}
+          dividerStyle={{ height: 2, backgroundColor: 'white' }}
         >
           <Text style={styles.challenge}>Two Sum</Text>
         </Card>
@@ -37,6 +38,7 @@ const Home = ({ navigation }) => {
             borderRadius: 10,
           }}
           titleStyle={{ color: 'white', alignSelf: 'flex-start' }}
+          dividerStyle={{ height: 2, backgroundColor: 'white' }}
         >
           <Text style={styles.snacks}>5 Snacks</Text>
         </Card>

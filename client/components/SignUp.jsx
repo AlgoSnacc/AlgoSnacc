@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
+import axios from 'axios';
 
 const SignUp = ({ navigation }) => {
   const [signup, setSignup] = useState({
@@ -8,16 +9,26 @@ const SignUp = ({ navigation }) => {
     email: '',
     password: '',
   });
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
   // function to signup users and store in db
-  const handleSignup = () => {
+  const handleSignup = async () => {
     console.log('in handleSignup', signup);
-    // const signupSuccess = await axios.post(`https://localhost:3000/`);
-    // console.log('success', signupSuccess);
-    setSuccess(true);
-    if (success) {
-      console.log('in success');
-      navigation.navigate('Home');
+    try {
+      const signupSuccess = await axios.post(`http://localhost:3000/signup`, {
+        username: signup.username,
+        email: signup.email,
+        password: signup.password,
+      });
+      console.log('success', signupSuccess.data);
+      if (signupSuccess.data) {
+        console.log('in success');
+        // setSuccess(true);
+        navigation.navigate('Home');
+      } else {
+        console.log('error');
+      }
+    } catch (error) {
+      console.log('error data');
     }
   };
 
