@@ -1,13 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import Login from '../components/Login.jsx';
+import Logo from '../assets/logo.png';
+import LogoName from '../assets/logo-name.png';
 
 const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.loginContainer}>
-        {/* input Logo here */}
-        <Text style={styles.appName}>AlgoSnacc</Text>
+        <Image style={styles.logo} source={LogoName} />
         <Login navigation={navigation} />
       </View>
     </View>
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '80%',
     alignItems: 'center',
+    paddingTop: 20,
     shadowOffset: { width: 0, height: 2 },
     shadowColor: '#000',
     shadowOpacity: 0.25,
@@ -39,5 +41,11 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     fontSize: 30,
     fontWeight: 'bold',
+  },
+  logo: {
+    width: 200,
+    height: 200,
+    // alignSelf: 'center',
+    marginTop: 20,
   },
 });
