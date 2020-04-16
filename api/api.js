@@ -4,6 +4,7 @@ const app = express();
 // const path = require('path');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const PORT = 3000;
 
@@ -11,14 +12,16 @@ const PORT = 3000;
 app.use(
   bodyParser.json(),
   bodyParser.urlencoded({ extended: true }),
-  cookieParser()
+  cookieParser(),
+  cors()
 );
 
 const loginRouter = require("./routes/Login");
+const apiRouter = require("./routes/Api");
 
 // Route handlers
+app.use("/api", apiRouter);
 app.use("/", loginRouter);
-// app.use("/api", apiRouter);
 
 // catch all
 app.use("/", (req, res) => {
