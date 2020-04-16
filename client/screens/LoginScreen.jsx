@@ -8,9 +8,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.loginContainer}>
-        {/* input Logo here */}
         <Image style={styles.logo} source={LogoName} />
-        {/* <Text style={styles.appName}>AlgoSnacc</Text> */}
         <Login navigation={navigation} />
       </View>
     </View>
