@@ -8,7 +8,7 @@ const Home = ({ navigation }) => {
       <TouchableOpacity
         onPress={() => {
           console.log('clicked challenge card');
-          navigation.navigate('Snacks');
+          navigation.navigate('Challenge');
         }}
       >
         <Card
